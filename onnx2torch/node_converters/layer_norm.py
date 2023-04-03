@@ -9,11 +9,11 @@ from typing import List
 
 from onnx2torch.node_converters.registry import add_converter
 from onnx2torch.onnx_graph import OnnxGraph
+from onnx2torch.utils.common import OnnxMapping
 from onnx2torch.onnx_node import OnnxNode
 from onnx2torch.utils.common import OnnxToTorchModule
 from onnx2torch.utils.common import OperationConverterResult
 from onnx2torch.utils.common import get_shape_from_value_info
-from onnx2torch.utils.common import onnx_mapping_from_node
 
 
 class OnnxLayerNorm(nn.Module, OnnxToTorchModule):  # pylint: disable=missing-docstring
@@ -47,8 +47,11 @@ def _(node: OnnxNode, graph: OnnxGraph) -> OperationConverterResult:
     normalized_shape = input_shape[axis:]
 
     torch_module = OnnxLayerNorm(normalized_shape=normalized_shape, epsilon=epsilon)
-    onnx_mapping = onnx_mapping_from_node(node)
 
+    onnx_mapping = OnnxMapping(
+        inputs=node.input_values,
+        outputs=(node.output_values[0],),
+    )
     return OperationConverterResult(
         torch_module=torch_module,
         onnx_mapping=onnx_mapping,

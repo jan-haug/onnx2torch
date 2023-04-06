@@ -53,8 +53,9 @@ class CustomExportToOnnx(torch.autograd.Function):
 
         Old name: `set_forward_and_apply`.
         """
-        CustomExportToOnnx._NEXT_FORWARD_FUNCTION = forward_function
-        return cls.apply(*args)
+        return forward_function()
+        # CustomExportToOnnx._NEXT_FORWARD_FUNCTION = forward_function
+        # return cls.apply(*args)
 
     @staticmethod
     def forward(ctx: Any, *args: Any, **kwargs: Any) -> Any:  # pylint: disable=unused-argument

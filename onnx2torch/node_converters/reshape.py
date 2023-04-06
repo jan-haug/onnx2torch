@@ -29,8 +29,8 @@ class OnnxReshape(nn.Module, OnnxToTorchModuleWithCustomExport):  # pylint: disa
     ) -> torch.Tensor:
         forward_lambda = lambda: self._do_reshape(input_tensor, shape)
 
-        # if torch.onnx.is_in_onnx_export():
-        #     return DefaultExportToOnnx.export(forward_lambda, 'Reshape', input_tensor, shape, {})
+        if torch.onnx.is_in_onnx_export():
+            return DefaultExportToOnnx.export(forward_lambda, 'Reshape', input_tensor, shape, {})
 
         return forward_lambda()
 

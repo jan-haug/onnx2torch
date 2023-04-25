@@ -28,6 +28,8 @@ class OnnxLayerNorm(nn.Module, OnnxToTorchModule):  # pylint: disable=missing-do
         weight: torch.Tensor,
         bias: torch.Tensor,
     ) -> torch.Tensor:
+        # Identity replacement alternative
+        # return input_data.clone()
         return F.layer_norm(
             input_data,
             normalized_shape=self.normalized_shape,

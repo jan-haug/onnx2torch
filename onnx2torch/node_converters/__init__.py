@@ -13,6 +13,7 @@ from onnx2torch.node_converters.cumsum import *
 from onnx2torch.node_converters.dropout import *
 from onnx2torch.node_converters.einsum import *
 from onnx2torch.node_converters.expand import *
+from onnx2torch.node_converters.eye_like import *
 from onnx2torch.node_converters.flatten import *
 from onnx2torch.node_converters.functions import *
 from onnx2torch.node_converters.gather import *
@@ -27,6 +28,7 @@ from onnx2torch.node_converters.matmul import *
 from onnx2torch.node_converters.max_pool import *
 from onnx2torch.node_converters.mean import *
 from onnx2torch.node_converters.min_max import *
+from onnx2torch.node_converters.mod import *
 from onnx2torch.node_converters.neg import *
 from onnx2torch.node_converters.nms import *
 from onnx2torch.node_converters.pad import *
